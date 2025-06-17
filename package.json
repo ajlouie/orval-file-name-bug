@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "npx prettier . --write --config .prettierrc.json",
     "generate-api": "npx orval --config ./orval.config.ts"
   },
   "author": "",

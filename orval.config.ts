@@ -6,23 +6,7 @@ export default defineConfig({
     output: {
       mode: 'tags-split',
       target: 'services',
-      workspace: 'src/app',
-      namingConvention: 'kebab-case',
-      tsconfig: './tsconfig.app.json',
-      baseUrl: {
-        getBaseUrlFromSpecification: true,
-      },
-      client: 'angular',
-      schemas: 'models',
-      mock: true,
-    },
-  },
-  pet_store_schemas: {
-    input: 'openapi.yaml',
-    output: {
-      mode: 'tags-split',
-      target: 'services',
-      workspace: 'src/app',
+      workspace: 'src/app/pet-store',
       namingConvention: 'kebab-case',
       tsconfig: './tsconfig.app.json',
       baseUrl: {
@@ -30,6 +14,13 @@ export default defineConfig({
       },
       client: 'zod',
       fileExtension: '.schema.ts',
+      indexFiles: true,
+    },
+    hooks: {
+      afterAllFilesWrite: {
+        command: 'npm run format',
+        injectGeneratedDirsAndFiles: false,
+      },
     },
   },
 });

@@ -12,61 +12,57 @@ Some useful links:
 - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
  * OpenAPI spec version: 1.0.27-SNAPSHOT
  */
-import {
-  z as zod
-} from 'zod';
-
+import {z as zod} from 'zod';
 
 /**
  * Returns a map of status codes to quantities.
  * @summary Returns pet inventories by status.
  */
-export const getInventoryResponse = zod.record(zod.string(), zod.number())
+export const getInventoryResponse = zod.record(zod.string(), zod.number());
 
 /**
  * Place a new order in the store.
  * @summary Place an order for a pet.
  */
 export const placeOrderBody = zod.object({
-  "id": zod.number().optional(),
-  "petId": zod.number().optional(),
-  "quantity": zod.number().optional(),
-  "shipDate": zod.string().datetime({}).optional(),
-  "status": zod.enum(['placed', 'approved', 'delivered']).optional().describe('Order Status'),
-  "complete": zod.boolean().optional()
-})
+  id: zod.number().optional(),
+  petId: zod.number().optional(),
+  quantity: zod.number().optional(),
+  shipDate: zod.string().datetime({}).optional(),
+  status: zod.enum(['placed', 'approved', 'delivered']).optional().describe('Order Status'),
+  complete: zod.boolean().optional(),
+});
 
 export const placeOrderResponse = zod.object({
-  "id": zod.number().optional(),
-  "petId": zod.number().optional(),
-  "quantity": zod.number().optional(),
-  "shipDate": zod.string().datetime({}).optional(),
-  "status": zod.enum(['placed', 'approved', 'delivered']).optional().describe('Order Status'),
-  "complete": zod.boolean().optional()
-})
+  id: zod.number().optional(),
+  petId: zod.number().optional(),
+  quantity: zod.number().optional(),
+  shipDate: zod.string().datetime({}).optional(),
+  status: zod.enum(['placed', 'approved', 'delivered']).optional().describe('Order Status'),
+  complete: zod.boolean().optional(),
+});
 
 /**
  * For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.
  * @summary Find purchase order by ID.
  */
 export const getOrderByIdParams = zod.object({
-  "orderId": zod.number().describe('ID of order that needs to be fetched')
-})
+  orderId: zod.number().describe('ID of order that needs to be fetched'),
+});
 
 export const getOrderByIdResponse = zod.object({
-  "id": zod.number().optional(),
-  "petId": zod.number().optional(),
-  "quantity": zod.number().optional(),
-  "shipDate": zod.string().datetime({}).optional(),
-  "status": zod.enum(['placed', 'approved', 'delivered']).optional().describe('Order Status'),
-  "complete": zod.boolean().optional()
-})
+  id: zod.number().optional(),
+  petId: zod.number().optional(),
+  quantity: zod.number().optional(),
+  shipDate: zod.string().datetime({}).optional(),
+  status: zod.enum(['placed', 'approved', 'delivered']).optional().describe('Order Status'),
+  complete: zod.boolean().optional(),
+});
 
 /**
  * For valid response try integer IDs with value < 1000. Anything above 1000 or non-integers will generate API errors.
  * @summary Delete purchase order by identifier.
  */
 export const deleteOrderParams = zod.object({
-  "orderId": zod.number().describe('ID of the order that needs to be deleted')
-})
-
+  orderId: zod.number().describe('ID of the order that needs to be deleted'),
+});
