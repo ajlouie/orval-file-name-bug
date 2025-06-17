@@ -1,26 +1,26 @@
-import {defineConfig} from 'orval';
+import {ConfigExternal} from '@orval/core';
+import {defineConfig, OutputClient} from 'orval';
 
-export default defineConfig({
-  pet_store: {
+const config: ConfigExternal = {};
+const clients: OutputClient[] = Object.values(OutputClient);
+
+for (const c of clients) {
+  config[c] = {
     input: 'openapi.yaml',
     output: {
+      workspace: `generated/${c}`,
+      target: 'api',
+      // schemas: 'models',
+      client: c,
       mode: 'tags-split',
-      target: 'services',
-      workspace: 'src/app/pet-store',
       namingConvention: 'kebab-case',
       tsconfig: './tsconfig.app.json',
       baseUrl: {
         getBaseUrlFromSpecification: true,
       },
-      client: 'zod',
-      fileExtension: '.schema.ts',
       indexFiles: true,
     },
-    hooks: {
-      afterAllFilesWrite: {
-        command: 'npm run format',
-        injectGeneratedDirsAndFiles: false,
-      },
-    },
-  },
-});
+  };
+}
+
+export default defineConfig(config);
